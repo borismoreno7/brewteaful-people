@@ -232,8 +232,15 @@ st.header("League Standings")
 
 standings = get_standings()
 
+df_standings = pd.DataFrame(standings)
+
+styled_standings = df_standings.style.format({
+    "+/-": lambda x: f"+{x}" if x > 0 else str(x),
+    "Win %": lambda x: f"{x:.1f}%"
+})
+
 st.dataframe(
-    standings,
+    styled_standings,
     column_order=[
         "Pos",
         "Tea",
